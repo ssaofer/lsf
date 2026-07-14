@@ -1,0 +1,240 @@
+/* ========================================
+   动画特效样式
+   进场动画 · 悬停效果 · 3D变换 · 关键帧
+   ======================================== */
+
+/* ---------- 元素进场动画(初始隐藏) ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal[data-delay="0"] { transition-delay: 0s; }
+.reveal[data-delay="100"] { transition-delay: 0.1s; }
+.reveal[data-delay="150"] { transition-delay: 0.15s; }
+.reveal[data-delay="200"] { transition-delay: 0.2s; }
+.reveal[data-delay="300"] { transition-delay: 0.3s; }
+.reveal[data-delay="400"] { transition-delay: 0.4s; }
+.reveal[data-delay="450"] { transition-delay: 0.45s; }
+.reveal[data-delay="500"] { transition-delay: 0.5s; }
+.reveal[data-delay="700"] { transition-delay: 0.7s; }
+
+/* 首屏特殊进场 */
+.section-about .hero .reveal {
+    opacity: 1;
+    transform: none;
+}
+
+.section-about .hero .hero-eyebrow {
+    animation: fadeInDown 0.8s ease 0.2s both;
+}
+
+.section-about .hero .hero-title {
+    animation: titleInflate 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+}
+
+.section-about .hero .hero-slogan {
+    animation: fadeInUp 0.8s ease 0.6s both;
+}
+
+.section-about .hero .hero-intro {
+    animation: fadeInUp 0.8s ease 0.8s both;
+}
+
+.section-about .hero .job-intent {
+    animation: fadeInUp 0.8s ease 1s both;
+}
+
+.section-about .hero .hero-avatar {
+    animation: scaleIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s both;
+}
+
+/* ---------- 关键帧动画 ---------- */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes titleInflate {
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+        letter-spacing: -10px;
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.05);
+        letter-spacing: 2px;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        letter-spacing: -1px;
+    }
+}
+
+@keyframes floatRotate {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+@keyframes floatY {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes floatX {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(15px);
+    }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ---------- 导航栏滚动状态 ---------- */
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+}
+
+/* ---------- 作品卡片倾斜效果 ---------- */
+.project-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.project-card:hover {
+    transform: translateY(-8px) perspective(800px) rotateX(2deg) rotateY(-2deg);
+}
+
+/* ---------- 时间线卡片进场 ---------- */
+.timeline-item.revealed:nth-child(odd) .timeline-card {
+    animation: slideInLeft 0.8s ease both;
+}
+
+.timeline-item.revealed:nth-child(even) .timeline-card {
+    animation: slideInRight 0.8s ease both;
+}
+
+/* ---------- 技能条动画 ---------- */
+.skill-item.revealed .skill-fill {
+    width: var(--target-width);
+}
+
+/* ---------- 兴趣卡片悬停增强 ---------- */
+.life-card:hover .life-card-front {
+    box-shadow: 0 0 0 1px var(--color-pink), 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- 滚动进度条 ---------- */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--color-pink);
+    z-index: 1001;
+    width: 0;
+    transition: width 0.1s ease;
+}
+
+/* ---------- 减少动画偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
