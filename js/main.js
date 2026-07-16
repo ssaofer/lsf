@@ -313,29 +313,16 @@
         });
     });
 
-    // ---------- 视频播放交互 ----------
+    // ---------- 视频卡片点击跳转B站 ----------
     const videoCards = document.querySelectorAll('.video-card');
     videoCards.forEach(function (card) {
-        const video = card.querySelector('video');
-        if (!video) return;
+        const bilibiliUrl = card.getAttribute('data-bilibili');
+        if (!bilibiliUrl) return;
 
-        card.addEventListener('mouseenter', function () {
-            video.muted = true;
-            video.loop = true;
-            video.play().catch(function () {});
-        });
-
-        card.addEventListener('mouseleave', function () {
-            video.pause();
-            video.currentTime = 0;
-        });
-
+        card.style.cursor = 'pointer';
         card.addEventListener('click', function (e) {
             e.preventDefault();
-            const source = video.querySelector('source');
-            if (source) {
-                window.open(source.src, '_blank');
-            }
+            window.open(bilibiliUrl, '_blank');
         });
     });
 
